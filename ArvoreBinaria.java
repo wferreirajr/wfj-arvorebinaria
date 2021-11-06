@@ -94,18 +94,31 @@ public class ArvoreBinaria {
     } // final do método alturaArvore
 
     //WILSON
-    // caminhamento pré-fixado da árvore binária
-    private void calcEsqFestiva(No atual) {
+    private long calcEsqFestiva(No atual, long a) {
         if (atual != null) {
-            System.out.println("Id: "+atual.getId()+" Elemento: "+atual.getElemento());
-            calcEsqFestiva(atual.getEsq());
+            long e;
+            e = calcEsqFestiva(atual.getEsq(),a) + 1;
+            return e;
         }
-    } // final método preFixado
+        return a;
+    }
 
-    // impressão dos elementos da árvore
-    public void imprimeEsqFestiva() {
-        calcEsqFestiva(raiz);
-    } // final do método para impressão
+    public long imprimeEsqFestiva() {
+        long a = 0;
+        return calcEsqFestiva(raiz, a);
+    }
+
+    private void getIds(No atual) { 
+        if (atual != null) { 
+            System.out.println("Id: "+atual.getId()); 
+            getIds(atual.getEsq()); 
+            getIds(atual.getDir()); 
+        }
+    }
+
+    public void imprimeId() {
+        getIds(raiz);
+    }
 
 }
 // Final da classe ArvoreBinaria
