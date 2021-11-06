@@ -40,5 +40,58 @@ public class ArvoreBinaria {
             }
         }
     } // final método insere
+
+    // caminhamento pré-fixado da árvore binária
+    private void preFixado(No atual) {
+        if (atual != null) {
+            System.out.println("Id: "+atual.getId()+" Elemento: "+atual.getElemento());
+            preFixado(atual.getEsq());
+            preFixado(atual.getDir());
+        }
+    } // final método preFixado
+
+    // caminhamento pós-fixado da árvore binária
+    private void posFixado(No atual) {
+        if (atual != null) {
+            posFixado(atual.getEsq());
+            posFixado(atual.getDir());
+            System.out.println("Id: "+atual.getId()+" Elemento: "+atual.getElemento());
+        }
+    } // final método posFixado
+
+    // caminhamento simétrico fixado da árvore binária
+    private void simFixado(No atual) {
+        if (atual != null) {
+            simFixado(atual.getEsq());
+            System.out.println("Id: "+atual.getId()+" Elemento: "+atual.getElemento());
+            simFixado(atual.getDir());
+        }
+    } // final método inFixado
+
+    // impressão dos elementos da árvore
+    public void imprimeElementosArvore() {
+        preFixado(raiz);
+    } // final do método para impressão
+
+    // calcula a altura da árvore
+    private long calcAltura(No atual, long a) {
+        if (atual != null) {
+            long e,d;
+            e = calcAltura(atual.getEsq(),a)+1;
+            d = calcAltura(atual.getDir(),a)+1;
+            if (e > d) {
+                return a+e;
+            } else {
+                return a+d;
+            }
+        }
+        return a;
+    } // final método calcAltura
+
+    public long alturaArvore() {
+        long a = 0;
+        return calcAltura(raiz,a);
+    } // final do método alturaArvore
+
 }
 // Final da classe ArvoreBinaria
